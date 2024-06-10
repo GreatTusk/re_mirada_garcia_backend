@@ -65,11 +65,6 @@ class Producto(models.Model):
     precio_oferta = models.DecimalField(max_digits=10, decimal_places=2, null=True, blank=True)
 
 
-class ProductoCarrito(models.Model):
-    producto = models.ForeignKey(Producto, on_delete=models.CASCADE)
-    cantidad = models.IntegerField()
-
-
 class Usuario(models.Model):
     id = models.CharField(max_length=255, primary_key=True)
     nombre = models.CharField(max_length=255)
@@ -77,11 +72,16 @@ class Usuario(models.Model):
 
 
 class Carrito(models.Model):
-    id = models.CharField(max_length=255, primary_key=True)
-    usuario = models.ForeignKey(Usuario, on_delete=models.CASCADE)
-    productos = models.ManyToManyField(ProductoCarrito)
-    precio_total = models.DecimalField(max_digits=10, decimal_places=2)
-    ahorros = models.DecimalField(max_digits=10, decimal_places=2)
+    usuario = models.OneToOneField(Usuario, primary_key=True, on_delete=models.CASCADE)
+    productos = models.ManyToManyField(Producto, through='ProductoCarrito')
+    precio_total = models.IntegerField()
+    ahorros = models.IntegerField()
+
+
+class ProductoCarrito(models.Model):
+    carrito = models.ForeignKey(Carrito, on_delete=models.CASCADE)
+    producto = models.ForeignKey(Producto, on_delete=models.CASCADE)
+    cantidad = models.IntegerField()
 
 
 class ListaItem(models.Model):
