@@ -52,6 +52,8 @@ def get_carrito_productos(request):
     elif request.method == 'POST':
         id_usuario = request.data.get('carrito')
         id_producto = request.data.get('producto')
+        print(id_producto)
+        print(id_usuario)
         if not id_usuario or not id_producto:
             return JsonResponse({"error": "ID de usuario y producto son requeridos"},
                                 status=status.HTTP_400_BAD_REQUEST)

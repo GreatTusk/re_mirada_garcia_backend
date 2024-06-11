@@ -117,6 +117,7 @@ class CartablogSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 class ProductoPCarritoSerializer(serializers.ModelSerializer):
+    producto_carrito = ProductoSerializer()
     class Meta:
         model = ProductoPCarrito
-        fields = '__all__'
+        fields = ['id', 'producto_carrito', 'cantidad']
