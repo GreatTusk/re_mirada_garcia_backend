@@ -4,12 +4,12 @@ from rest_framework.exceptions import ValidationError
 from rest_framework.response import Response
 
 from .models import (ItemPortafolio, Servicios, PlanFoto, Cliente,
-                     ItemTestimonio, ContactoVenta, Producto, ProductoCarrito, Usuario,
+                     ItemTestimonio, ContactoVenta, Producto, Usuario,
                      Carrito, ListaItem, BlogImagen, Seccion, Cartablog, ImageFolders, ImageConfigPortafolio,
                      ProductoPCarrito)
 from .serializers import (ItemPortafolioSerializer, ServiciosSerializer,
                           PlanFotoSerializer, ClienteSerializer, ItemTestimonioSerializer,
-                          ContactoVentaSerializer, ProductoSerializer, ProductoCarritoSerializer,
+                          ContactoVentaSerializer, ProductoSerializer,
                           UsuarioSerializer, CarritoSerializer, ListaItemSerializer,
                           BlogImagenSerializer, SeccionSerializer, CartablogSerializer, ImageFolderSerializer,
                           ImageConfigPortafolioSerializer, ProductoPCarritoSerializer)
@@ -66,12 +66,6 @@ class ContactoVentaViewSet(viewsets.ModelViewSet):
 class ProductoViewSet(viewsets.ModelViewSet):
     queryset = Producto.objects.all()
     serializer_class = ProductoSerializer
-    permission_classes = [permissions.AllowAny]
-
-
-class ProductoCarritoViewSet(viewsets.ModelViewSet):
-    queryset = ProductoCarrito.objects.all()
-    serializer_class = ProductoCarritoSerializer
     permission_classes = [permissions.AllowAny]
 
 

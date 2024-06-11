@@ -58,11 +58,11 @@ class ContactoVenta(models.Model):
 
 
 class Producto(models.Model):
-    id = models.CharField(max_length=255, primary_key=True)
+    id = models.AutoField(primary_key=True)
     nombre = models.CharField(max_length=255)
-    precio = models.DecimalField(max_digits=10, decimal_places=2)
-    imagen_url = models.URLField()
-    precio_oferta = models.DecimalField(max_digits=10, decimal_places=2, null=True, blank=True)
+    precio = models.IntegerField()
+    imagen_url = models.CharField(max_length=255)
+    precio_oferta = models.IntegerField(null=True, blank=True)
 
 
 class Usuario(models.Model):
@@ -77,14 +77,10 @@ class Carrito(models.Model):
     ahorros = models.IntegerField()
 
 
-class ProductoCarrito(models.Model):
-    producto = models.ForeignKey(Producto, on_delete=models.CASCADE)
-    cantidad = models.IntegerField()
-
-
 class ProductoPCarrito(models.Model):
+    # carrito = id_usuario
     carrito = models.ForeignKey(Carrito, default=None, on_delete=models.CASCADE)
-    producto_carrito = models.ForeignKey(ProductoCarrito, on_delete=models.CASCADE)
+    producto_carrito = models.ForeignKey(Producto, on_delete=models.CASCADE)
     cantidad = models.IntegerField()
 
 

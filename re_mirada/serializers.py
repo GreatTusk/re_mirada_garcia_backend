@@ -3,7 +3,7 @@ import json
 from rest_framework import serializers
 
 from .models import (ImageConfigPortafolio, ItemPortafolio, Servicios, PlanFoto, Cliente,
-                     ItemTestimonio, ContactoVenta, Producto, ProductoCarrito, Usuario,
+                     ItemTestimonio, ContactoVenta, Producto, Usuario,
                      Carrito, ListaItem, BlogImagen, Seccion, Cartablog, ImageFolders, ProductoPCarrito)
 
 
@@ -78,13 +78,7 @@ class ContactoVentaSerializer(serializers.ModelSerializer):
 class ProductoSerializer(serializers.ModelSerializer):
     class Meta:
         model = Producto
-        fields = '__all__'
-
-
-class ProductoCarritoSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = ProductoCarrito
-        fields = '__all__'
+        fields = ['nombre', 'precio', 'precio_oferta', 'imagen_url']
 
 
 class UsuarioSerializer(serializers.ModelSerializer):
