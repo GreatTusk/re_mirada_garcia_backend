@@ -73,14 +73,18 @@ class Usuario(models.Model):
 
 class Carrito(models.Model):
     usuario = models.OneToOneField(Usuario, primary_key=True, on_delete=models.CASCADE)
-    productos = models.ManyToManyField(Producto, through='ProductoCarrito')
     precio_total = models.IntegerField()
     ahorros = models.IntegerField()
 
 
 class ProductoCarrito(models.Model):
-    carrito = models.ForeignKey(Carrito, on_delete=models.CASCADE)
     producto = models.ForeignKey(Producto, on_delete=models.CASCADE)
+    cantidad = models.IntegerField()
+
+
+class ProductoPCarrito(models.Model):
+    carrito = models.ForeignKey(Carrito, default=None, on_delete=models.CASCADE)
+    producto_carrito = models.ForeignKey(ProductoCarrito, on_delete=models.CASCADE)
     cantidad = models.IntegerField()
 
 

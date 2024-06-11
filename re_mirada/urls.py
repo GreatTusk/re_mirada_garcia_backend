@@ -1,9 +1,10 @@
 from rest_framework import routers
-
+from django.urls import path, include
 from .api import (ItemPortafolioViewSet, ServiciosViewSet, PlanFotoViewSet, ClienteViewSet,
                   ItemTestimonioViewSet, ContactoVentaViewSet, ProductoViewSet, ProductoCarritoViewSet,
                   UsuarioViewSet, CarritoViewSet, ListaItemViewSet, BlogImagenViewSet, SeccionViewSet,
-                  CartablogViewSet, ImageFolderViewset, ImageConfigPortafolioViewSet)
+                  CartablogViewSet, ImageFolderViewset, ImageConfigPortafolioViewSet, ProductoPCarritoViewSet)
+from .views import register_usuario
 
 router = routers.DefaultRouter()
 router.register('itemportafolio', ItemPortafolioViewSet)
@@ -22,4 +23,9 @@ router.register('seccion', SeccionViewSet)
 router.register('cartablog', CartablogViewSet)
 router.register('imagefolders', ImageFolderViewset)
 router.register('imageconfigportafolio', ImageConfigPortafolioViewSet)
+router.register('productopcarrito', ProductoPCarritoViewSet)
+
 urlpatterns = router.urls
+urlpatterns += [
+    path('register_usuario/', register_usuario),
+]
