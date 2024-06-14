@@ -34,26 +34,25 @@ def register_usuario(request):
     return JsonResponse(serializer.data, status=status.HTTP_201_CREATED)
 
 
-@api_view(['GET', 'POST'])
-def get_carrito_productos(request):
+@api_view(['GET', 'POST', 'PUT', 'DELETE'])
+def carrito_productos(request):
     if request.method == 'GET':
         id_usuario = request.query_params.get('carrito')
         if not id_usuario:
             return JsonResponse({"error": "ID de usuario es requerido"}, status=status.HTTP_400_BAD_REQUEST)
         try:
-            carrito_productos = ProductoPCarrito.objects.filter(carrito=id_usuario)
+            carrito_producto = ProductoPCarrito.objects.filter(carrito=id_usuario)
         except Carrito.DoesNotExist:
             return JsonResponse({"error": "Carrito no encontrado"}, status=status.HTTP_404_NOT_FOUND)
 
         # Serialize the QuerySet
-        serializer = ProductoPCarritoSerializer(carrito_productos, many=True)
+        serializer = ProductoPCarritoSerializer(carrito_producto, many=True)
 
         return Response(serializer.data, status=status.HTTP_200_OK)
     elif request.method == 'POST':
         id_usuario = request.data.get('carrito')
         id_producto = request.data.get('producto')
-        print(id_producto)
-        print(id_usuario)
+
         if not id_usuario or not id_producto:
             return JsonResponse({"error": "ID de usuario y producto son requeridos"},
                                 status=status.HTTP_400_BAD_REQUEST)
@@ -67,3 +66,36 @@ def get_carrito_productos(request):
             print(e)
             return JsonResponse({"error": "Producto no encontrado"}, status=status.HTTP_404_NOT_FOUND)
         return JsonResponse({"message": "Producto añadido al carrito"}, status=status.HTTP_201_CREATED)
+    elif request.method == 'PUT':
+        id_usuario = request.data.get('carrito')
+        id_producto_carrito = request.data.get('producto')
+        nueva_cantidad = request.data.get('cantidad')
+
+        if not id_usuario or not id_producto_carrito or nueva_cantidad is None:
+            return JsonResponse({"error": "ID de usuario, producto y cantidad son requeridos"},
+                                status=status.HTTP_400_BAD_REQUEST)
+
+        try:
+            producto_carrito = ProductoPCarrito.objects.get(carrito=id_usuario, id=id_producto_carrito)
+        except ProductoPCarrito.DoesNotExist:
+            return JsonResponse({"error": "Producto en carrito no encontrado"}, status=status.HTTP_404_NOT_FOUND)
+
+        producto_carrito.cantidad = nueva_cantidad
+        print(producto_carrito.cantidad)
+        producto_carrito.save()
+        # Serialize the updated ProductoPCarrito object
+        serializer = ProductoPCarritoSerializer(producto_carrito)
+        return JsonResponse(serializer.data, status=status.HTTP_200_OK)
+    elif request.method == 'DELETE':
+        id_producto_carrito = request.data.get('producto')
+        if not id_producto_carrito:
+            return JsonResponse({"error": "producto es requeridos"},
+                                status=status.HTTP_400_BAD_REQUEST)
+        try:
+            producto_carrito = ProductoPCarrito.objects.get(id=id_producto_carrito)
+        except ProductoPCarrito.DoesNotExist:
+            return JsonResponse({"error": "Producto en carrito no encontrado"}, status=status.HTTP_404_NOT_FOUND)
+
+        producto_carrito.delete()
+
+        return JsonResponse({"message": "Producto eliminado del carrito"}, status=status.HTTP_200_OK)

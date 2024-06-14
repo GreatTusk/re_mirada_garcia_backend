@@ -4,7 +4,7 @@ from .api import (ItemPortafolioViewSet, ServiciosViewSet, PlanFotoViewSet, Clie
                   ItemTestimonioViewSet, ContactoVentaViewSet, ProductoViewSet,
                   UsuarioViewSet, CarritoViewSet, ListaItemViewSet, BlogImagenViewSet, SeccionViewSet,
                   CartablogViewSet, ImageFolderViewset, ImageConfigPortafolioViewSet, ProductoPCarritoViewSet)
-from .views import register_usuario, get_carrito_productos
+from .views import register_usuario, carrito_productos
 
 router = routers.DefaultRouter()
 router.register('itemportafolio', ItemPortafolioViewSet)
@@ -27,5 +27,5 @@ router.register('productopcarrito', ProductoPCarritoViewSet)
 urlpatterns = router.urls
 urlpatterns += [
     path('register_usuario/', register_usuario),
-    path('get_carrito_productos/', get_carrito_productos),
+    path('carrito_productos/', carrito_productos),
 ]

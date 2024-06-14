@@ -56,7 +56,6 @@ class PlanFotoSerializer(serializers.ModelSerializer):
 
 
 class ClienteSerializer(serializers.ModelSerializer):
-
     class Meta:
         model = Cliente
         fields = '__all__'
@@ -64,6 +63,7 @@ class ClienteSerializer(serializers.ModelSerializer):
 
 class ItemTestimonioSerializer(serializers.ModelSerializer):
     cliente = ClienteSerializer()
+
     class Meta:
         model = ItemTestimonio
         fields = '__all__'
@@ -116,8 +116,10 @@ class CartablogSerializer(serializers.ModelSerializer):
         model = Cartablog
         fields = '__all__'
 
+
 class ProductoPCarritoSerializer(serializers.ModelSerializer):
     producto_carrito = ProductoSerializer()
+
     class Meta:
         model = ProductoPCarrito
-        fields = ['id', 'producto_carrito', 'cantidad']
+        fields = ['id', 'producto_carrito', 'cantidad', 'carrito']
