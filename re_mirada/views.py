@@ -4,7 +4,7 @@ from rest_framework.decorators import api_view
 from rest_framework import status
 from rest_framework.response import Response
 
-from .models import Usuario, Carrito, ProductoPCarrito
+from .models import Usuario, Carrito, ProductoPCarrito, Producto
 from .serializers import UsuarioSerializer, ProductoPCarritoSerializer
 
 
@@ -50,8 +50,9 @@ def carrito_productos(request):
 
         return Response(serializer.data, status=status.HTTP_200_OK)
     elif request.method == 'POST':
-        id_usuario = request.data.get('carrito')
-        id_producto = request.data.get('producto')
+        id_usuario = request.data.get('id')
+        id_producto = request.data.get('producto_carrito')
+        cantidad_producto = request.data.get('cantidad')
 
         if not id_usuario or not id_producto:
             return JsonResponse({"error": "ID de usuario y producto son requeridos"},
@@ -61,27 +62,27 @@ def carrito_productos(request):
         except Carrito.DoesNotExist:
             return JsonResponse({"error": "Carrito no encontrado"}, status=status.HTTP_404_NOT_FOUND)
         try:
-            ProductoPCarrito.objects.create(carrito=carrito, producto=id_producto)
+            producto = Producto.objects.get(id=id_producto)
+            ProductoPCarrito.objects.create(carrito=carrito, producto_carrito=producto, cantidad=cantidad_producto)
         except ValidationError as e:
             print(e)
             return JsonResponse({"error": "Producto no encontrado"}, status=status.HTTP_404_NOT_FOUND)
+
         return JsonResponse({"message": "Producto añadido al carrito"}, status=status.HTTP_201_CREATED)
     elif request.method == 'PUT':
-        id_usuario = request.data.get('carrito')
         id_producto_carrito = request.data.get('producto')
         nueva_cantidad = request.data.get('cantidad')
 
-        if not id_usuario or not id_producto_carrito or nueva_cantidad is None:
+        if not id_producto_carrito or nueva_cantidad is None:
             return JsonResponse({"error": "ID de usuario, producto y cantidad son requeridos"},
                                 status=status.HTTP_400_BAD_REQUEST)
 
         try:
-            producto_carrito = ProductoPCarrito.objects.get(carrito=id_usuario, id=id_producto_carrito)
+            producto_carrito = ProductoPCarrito.objects.get(id=id_producto_carrito)
         except ProductoPCarrito.DoesNotExist:
             return JsonResponse({"error": "Producto en carrito no encontrado"}, status=status.HTTP_404_NOT_FOUND)
 
         producto_carrito.cantidad = nueva_cantidad
-        print(producto_carrito.cantidad)
         producto_carrito.save()
         # Serialize the updated ProductoPCarrito object
         serializer = ProductoPCarritoSerializer(producto_carrito)

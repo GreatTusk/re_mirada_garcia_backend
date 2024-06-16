@@ -78,7 +78,7 @@ class ContactoVentaSerializer(serializers.ModelSerializer):
 class ProductoSerializer(serializers.ModelSerializer):
     class Meta:
         model = Producto
-        fields = ['nombre', 'precio', 'precio_oferta', 'imagen_url']
+        fields = ['id', 'nombre', 'precio', 'precio_oferta', 'imagen_url']
 
 
 class UsuarioSerializer(serializers.ModelSerializer):
