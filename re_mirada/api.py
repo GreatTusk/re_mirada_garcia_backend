@@ -6,13 +6,13 @@ from rest_framework.response import Response
 from .models import (ItemPortafolio, Servicios, PlanFoto, Cliente,
                      ItemTestimonio, ContactoVenta, Producto, Usuario,
                      Carrito, ListaItem, BlogImagen, Seccion, Cartablog, ImageFolders, ImageConfigPortafolio,
-                     ProductoPCarrito)
+                     ProductoPCarrito, Pedido)
 from .serializers import (ItemPortafolioSerializer, ServiciosSerializer,
                           PlanFotoSerializer, ClienteSerializer, ItemTestimonioSerializer,
                           ContactoVentaSerializer, ProductoSerializer,
                           UsuarioSerializer, CarritoSerializer, ListaItemSerializer,
                           BlogImagenSerializer, SeccionSerializer, CartablogSerializer, ImageFolderSerializer,
-                          ImageConfigPortafolioSerializer, ProductoPCarritoSerializer)
+                          ImageConfigPortafolioSerializer, ProductoPCarritoSerializer, PedidoSerializer)
 
 
 class ImageFolderViewset(viewsets.ModelViewSet):
@@ -135,4 +135,10 @@ class CartablogViewSet(viewsets.ModelViewSet):
 class ProductoPCarritoViewSet(viewsets.ModelViewSet):
     queryset = ProductoPCarrito.objects.all()
     serializer_class = ProductoPCarritoSerializer
+    permission_classes = [permissions.AllowAny]
+
+
+class PedidoViewSet(viewsets.ModelViewSet):
+    queryset = Pedido.objects.all()
+    serializer_class = PedidoSerializer
     permission_classes = [permissions.AllowAny]

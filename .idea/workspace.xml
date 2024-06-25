@@ -4,16 +4,23 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d83804fa-4c8d-465a-8197-2461a69458b0" name="Changes" comment="vistas creadas">
+    <list default="true" id="d83804fa-4c8d-465a-8197-2461a69458b0" name="Changes" comment="vistas creadas y terminadas">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/db.sqlite3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/re_mirada/serializers.py" beforeDir="false" afterPath="$PROJECT_DIR$/re_mirada/serializers.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/re_mirada/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/re_mirada/views.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="DaemonCodeAnalyzer">
+    <disable_hints>
+      <file url="mock:///RestfulBox-Editor:Body" />
+      <file url="mock:///RestfulBox-Editor:Config" />
+      <file url="mock:///RestfulBox-Editor:Headers" />
+      <file url="mock:///RestfulBox-Editor:Info" />
+      <file url="mock:///RestfulBox-Editor:Params" />
+      <file url="mock:///RestfulBox-Editor:Response" />
+    </disable_hints>
   </component>
   <component name="DjangoConsoleOptions" custom-start-script="import sys; print('Python %s on %s' % (sys.version, sys.platform))&#10;import django; print('Django %s' % django.get_version())&#10;sys.path.extend([WORKING_DIR_AND_PYTHON_PATHS])&#10;if 'setup' in dir(django): django.setup()&#10;import django_manage_shell; django_manage_shell.run(PROJECT_ROOT)">
     <option name="myCustomStartScript" value="import sys; print('Python %s on %s' % (sys.version, sys.platform))&#10;import django; print('Django %s' % django.get_version())&#10;sys.path.extend([WORKING_DIR_AND_PYTHON_PATHS])&#10;if 'setup' in dir(django): django.setup()&#10;import django_manage_shell; django_manage_shell.run(PROJECT_ROOT)" />
@@ -55,6 +62,7 @@
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
     &quot;git-widget-placeholder&quot;: &quot;Fernando&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
     &quot;last_opened_file_path&quot;: &quot;C:/Users/F776/PycharmProjects/re_mirada_garcia_backend&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
@@ -124,7 +132,11 @@
       <workItem from="1718323430511" duration="83000" />
       <workItem from="1718415016918" duration="555000" />
       <workItem from="1718509612189" duration="3196000" />
-      <workItem from="1718559383721" duration="2678000" />
+      <workItem from="1718559383721" duration="3589000" />
+      <workItem from="1718767159789" duration="611000" />
+      <workItem from="1718769625898" duration="609000" />
+      <workItem from="1719026341516" duration="10000" />
+      <workItem from="1719086232220" duration="3182000" />
     </task>
     <task id="LOCAL-00001" summary="transición del backend a django">
       <option name="closed" value="true" />
@@ -158,7 +170,23 @@
       <option name="project" value="LOCAL" />
       <updated>1718323505304</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="vistas creadas y terminadas">
+      <option name="closed" value="true" />
+      <created>1718568685605</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1718568685605</updated>
+    </task>
+    <task id="LOCAL-00006" summary="vistas creadas y terminadas">
+      <option name="closed" value="true" />
+      <created>1719097549911</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1719097549911</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -178,6 +206,7 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="transición del backend a django" />
     <MESSAGE value="vistas creadas" />
-    <option name="LAST_COMMIT_MESSAGE" value="vistas creadas" />
+    <MESSAGE value="vistas creadas y terminadas" />
+    <option name="LAST_COMMIT_MESSAGE" value="vistas creadas y terminadas" />
   </component>
 </project>

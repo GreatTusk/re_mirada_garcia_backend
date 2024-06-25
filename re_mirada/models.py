@@ -67,8 +67,10 @@ class Producto(models.Model):
 
 class Usuario(models.Model):
     id = models.CharField(max_length=255, primary_key=True)
-    nombre = models.CharField(max_length=255)
+    first_name = models.CharField(max_length=255)
+    last_name = models.CharField(max_length=255, null=True)
     email = models.EmailField()
+    phone_number = models.CharField(max_length=255, null=True)
 
 
 class Carrito(models.Model):
@@ -114,3 +116,20 @@ class Cartablog(models.Model):
     fechapub = models.DateField()
     tag = models.CharField(max_length=255)
     cita = models.TextField(null=True, blank=True)
+
+
+class Pedido(models.Model):
+    id = models.AutoField(primary_key=True)
+    direccion = models.CharField(max_length=255, blank=True, null=True)
+    region = models.CharField(max_length=255, blank=True, null=True)
+    comuna = models.CharField(max_length=255, blank=True, null=True)
+    descripcion = models.TextField(blank=True, null=True)
+    fecha = models.CharField(max_length=255)
+    metodo_pago = models.CharField(max_length=255, blank=True, null=True)
+    nombre_empresa = models.CharField(max_length=255, blank=True, null=True)
+    rut_empresa = models.CharField(max_length=255, blank=True, null=True)
+    carrito = models.ForeignKey(Carrito, on_delete=models.CASCADE)
+    first_name = models.CharField(max_length=255)
+    last_name = models.CharField(max_length=255)
+    email = models.EmailField()
+    phone_number = models.CharField(max_length=255, blank=True, null=True)
