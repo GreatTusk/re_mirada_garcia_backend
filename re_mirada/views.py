@@ -181,10 +181,26 @@ def carrito_pedido(request):
         if not nombre or not apellido or not email or not direccion or not region or not comuna or not telefono or not descripcion or not metodo_pago or not fecha:
             return JsonResponse({"error": "Todos los campos son requeridos"},
                                 status=status.HTTP_400_BAD_REQUEST)
+        try:
+            pedido = Pedido.objects.get(carrito=carrito)
+            pedido.direccion = direccion
+            pedido.region = region
+            pedido.comuna = comuna
+            pedido.descripcion = descripcion
+            pedido.fecha = fecha
+            pedido.metodo_pago = metodo_pago
+            pedido.nombre_empresa = nombre_empresa
+            pedido.rut_empresa = rut_empresa
+            pedido.phone_number = telefono
+            pedido.email = email
+            pedido.first_name = nombre
+            pedido.last_name = apellido
+            pedido.save()
+            return JsonResponse({"status": "actualizado"}, status=status.HTTP_200_OK)
+        except Pedido.DoesNotExist:
+            pedido = Pedido.objects.create(direccion=direccion, region=region, comuna=comuna, descripcion=descripcion,
+                                           fecha=fecha, metodo_pago=metodo_pago, nombre_empresa=nombre_empresa,
+                                           rut_empresa=rut_empresa, carrito=carrito, phone_number=telefono, email=email,
+                                           first_name=nombre, last_name=apellido)
 
-        pedido = Pedido.objects.create(direccion=direccion, region=region, comuna=comuna, descripcion=descripcion,
-                                       fecha=fecha, metodo_pago=metodo_pago, nombre_empresa=nombre_empresa,
-                                       rut_empresa=rut_empresa, carrito=carrito, phone_number=telefono, email=email,
-                                       first_name=nombre, last_name=apellido)
-
-        return JsonResponse({"id": pedido.id}, status=status.HTTP_201_CREATED)
+        return JsonResponse({"status": "creado"}, status=status.HTTP_201_CREATED)

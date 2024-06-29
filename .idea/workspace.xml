@@ -4,23 +4,18 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d83804fa-4c8d-465a-8197-2461a69458b0" name="Changes" comment="vistas creadas y terminadas">
+    <list default="true" id="d83804fa-4c8d-465a-8197-2461a69458b0" name="Changes" comment="creadas vistas para los datos del pedido">
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/db.sqlite3" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/re_mirada/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/re_mirada/admin.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/re_mirada/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/re_mirada/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/re_mirada/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/re_mirada/views.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
-  </component>
-  <component name="DaemonCodeAnalyzer">
-    <disable_hints>
-      <file url="mock:///RestfulBox-Editor:Body" />
-      <file url="mock:///RestfulBox-Editor:Config" />
-      <file url="mock:///RestfulBox-Editor:Headers" />
-      <file url="mock:///RestfulBox-Editor:Info" />
-      <file url="mock:///RestfulBox-Editor:Params" />
-      <file url="mock:///RestfulBox-Editor:Response" />
-    </disable_hints>
   </component>
   <component name="DjangoConsoleOptions" custom-start-script="import sys; print('Python %s on %s' % (sys.version, sys.platform))&#10;import django; print('Django %s' % django.get_version())&#10;sys.path.extend([WORKING_DIR_AND_PYTHON_PATHS])&#10;if 'setup' in dir(django): django.setup()&#10;import django_manage_shell; django_manage_shell.run(PROJECT_ROOT)">
     <option name="myCustomStartScript" value="import sys; print('Python %s on %s' % (sys.version, sys.platform))&#10;import django; print('Django %s' % django.get_version())&#10;sys.path.extend([WORKING_DIR_AND_PYTHON_PATHS])&#10;if 'setup' in dir(django): django.setup()&#10;import django_manage_shell; django_manage_shell.run(PROJECT_ROOT)" />
@@ -70,6 +65,7 @@
     &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
     &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
     &quot;settings.editor.selected.configurable&quot;: &quot;com.intellij.python.django.customization.DjangoModulesConfigurable&quot;,
+    &quot;ts.external.directory.path&quot;: &quot;C:\\Users\\F776\\AppData\\Local\\Programs\\PyCharm Professional\\plugins\\javascript-plugin\\jsLanguageServicesImpl\\external&quot;,
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
 }</component>
@@ -110,8 +106,8 @@
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-js-predefined-1d06a55b98c1-0b3e54e931b4-JavaScript-PY-241.17890.14" />
-        <option value="bundled-python-sdk-5b207ade9991-7e9c3bbb6e34-com.jetbrains.pycharm.pro.sharedIndexes.bundled-PY-241.17890.14" />
+        <option value="bundled-js-predefined-1d06a55b98c1-0b3e54e931b4-JavaScript-PY-241.18034.82" />
+        <option value="bundled-python-sdk-975db3bf15a3-2767605e8bc2-com.jetbrains.pycharm.pro.sharedIndexes.bundled-PY-241.18034.82" />
       </set>
     </attachedChunks>
   </component>
@@ -137,6 +133,10 @@
       <workItem from="1718769625898" duration="609000" />
       <workItem from="1719026341516" duration="10000" />
       <workItem from="1719086232220" duration="3182000" />
+      <workItem from="1719257027177" duration="15868000" />
+      <workItem from="1719281227747" duration="684000" />
+      <workItem from="1719528618795" duration="2984000" />
+      <workItem from="1719624649297" duration="3973000" />
     </task>
     <task id="LOCAL-00001" summary="transición del backend a django">
       <option name="closed" value="true" />
@@ -186,7 +186,15 @@
       <option name="project" value="LOCAL" />
       <updated>1719097549911</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="creadas vistas para los datos del pedido">
+      <option name="closed" value="true" />
+      <created>1719279118780</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1719279118780</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -207,6 +215,7 @@
     <MESSAGE value="transición del backend a django" />
     <MESSAGE value="vistas creadas" />
     <MESSAGE value="vistas creadas y terminadas" />
-    <option name="LAST_COMMIT_MESSAGE" value="vistas creadas y terminadas" />
+    <MESSAGE value="creadas vistas para los datos del pedido" />
+    <option name="LAST_COMMIT_MESSAGE" value="creadas vistas para los datos del pedido" />
   </component>
 </project>
