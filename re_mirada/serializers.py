@@ -4,7 +4,8 @@ from rest_framework import serializers
 
 from .models import (ImageConfigPortafolio, ItemPortafolio, Servicios, PlanFoto, Cliente,
                      ItemTestimonio, ContactoVenta, Producto, Usuario,
-                     Carrito, ListaItem, BlogImagen, Seccion, Cartablog, ImageFolders, ProductoPCarrito, Pedido)
+                     Carrito, ListaItem, BlogImagen, Seccion, Cartablog, ImageFolders, ProductoPCarrito, Pedido,
+                     PedidoHistorico)
 
 
 class ImageFolderSerializer(serializers.ModelSerializer):
@@ -133,5 +134,5 @@ class PedidoSerializer(serializers.ModelSerializer):
 
 class PedidoHistoricoSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Pedido
+        model = PedidoHistorico
         fields = '__all__'

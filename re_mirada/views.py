@@ -1,3 +1,5 @@
+import uuid
+
 from django.core.exceptions import ValidationError
 from django.http import JsonResponse
 from rest_framework.decorators import api_view
@@ -218,8 +220,10 @@ def carrito_pedido(request):
         except Pedido.DoesNotExist:
             return JsonResponse({"error": "Pedido not found"}, status=status.HTTP_404_NOT_FOUND)
 
+        id_pedido_historico = str(uuid.uuid4())
         # Create a PedidoHistorico instance with the same data as the Pedido instance
         PedidoHistorico.objects.create(
+            id_pedido=id_pedido_historico,
             usuario=pedido.carrito.usuario,
             direccion=pedido.direccion,
             region=pedido.region,
@@ -235,7 +239,9 @@ def carrito_pedido(request):
             phone_number=pedido.phone_number,
         )
 
+        # Empty the user's carrito
+        ProductoPCarrito.objects.filter(carrito=carrito).delete()
         # Delete the Pedido instance
         pedido.delete()
 
-        return JsonResponse({"message": "Pedido confirmed and deleted"}, status=status.HTTP_200_OK)
+        return JsonResponse({"id": id_pedido_historico}, status=status.HTTP_200_OK)

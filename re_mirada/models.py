@@ -135,7 +135,7 @@ class Pedido(models.Model):
 
 class PedidoHistorico(models.Model):
     id_pedido = models.UUIDField(primary_key=True)
-    usuario = models.OneToOneField(Usuario, on_delete=models.CASCADE)
+    usuario = models.ForeignKey(Usuario, on_delete=models.CASCADE)
     direccion = models.CharField(max_length=255)
     region = models.CharField(max_length=255)
     comuna = models.CharField(max_length=255)

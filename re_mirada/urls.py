@@ -25,7 +25,7 @@ router.register('imagefolders', ImageFolderViewset)
 router.register('imageconfigportafolio', ImageConfigPortafolioViewSet)
 router.register('productopcarrito', ProductoPCarritoViewSet)
 router.register('pedido', PedidoViewSet)
-router.register('pedidohistorico', PedidoHistoricoViewset, basename='pedidohistorico')
+router.register('pedidohistorico', PedidoHistoricoViewset)
 
 urlpatterns = router.urls
 urlpatterns += [
