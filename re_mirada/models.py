@@ -131,3 +131,21 @@ class Pedido(models.Model):
     last_name = models.CharField(max_length=255)
     email = models.EmailField()
     phone_number = models.CharField(max_length=255)
+
+
+class PedidoHistorico(models.Model):
+    id_pedido = models.UUIDField(primary_key=True)
+    usuario = models.OneToOneField(Usuario, on_delete=models.CASCADE)
+    direccion = models.CharField(max_length=255)
+    region = models.CharField(max_length=255)
+    comuna = models.CharField(max_length=255)
+    descripcion = models.TextField()
+    fecha = models.CharField(max_length=255)
+    metodo_pago = models.CharField(max_length=255)
+    nombre_empresa = models.CharField(max_length=255, blank=True, null=True)
+    rut_empresa = models.CharField(max_length=255, blank=True, null=True)
+    first_name = models.CharField(max_length=255)
+    last_name = models.CharField(max_length=255)
+    email = models.EmailField()
+    phone_number = models.CharField(max_length=255)
+    fecha_creacion = models.DateTimeField(auto_now_add=True)

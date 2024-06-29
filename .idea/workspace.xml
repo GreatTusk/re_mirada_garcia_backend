@@ -5,11 +5,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d83804fa-4c8d-465a-8197-2461a69458b0" name="Changes" comment="creadas vistas para los datos del pedido">
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/db.sqlite3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/re_mirada/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/re_mirada/admin.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/re_mirada/api.py" beforeDir="false" afterPath="$PROJECT_DIR$/re_mirada/api.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/re_mirada/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/re_mirada/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/re_mirada/serializers.py" beforeDir="false" afterPath="$PROJECT_DIR$/re_mirada/serializers.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/re_mirada/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/re_mirada/urls.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/re_mirada/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/re_mirada/views.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -23,10 +24,11 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="Fernando" />
+        <entry key="$PROJECT_DIR$" value="eedd7a1e32aed1495b4136545fe00d65575ca438" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="RESET_MODE" value="HARD" />
     <option name="UPDATE_TYPE" value="REBASE" />
   </component>
   <component name="GitHubPullRequestSearchHistory">{

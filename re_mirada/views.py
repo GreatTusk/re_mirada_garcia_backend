@@ -4,7 +4,7 @@ from rest_framework.decorators import api_view
 from rest_framework import status
 from rest_framework.response import Response
 
-from .models import Usuario, Carrito, ProductoPCarrito, Producto, Pedido
+from .models import Usuario, Carrito, ProductoPCarrito, Producto, Pedido, PedidoHistorico
 from .serializers import UsuarioSerializer, ProductoPCarritoSerializer
 
 
@@ -134,7 +134,7 @@ def carrito_productos(request):
         return JsonResponse({"message": "Producto eliminado del carrito"}, status=status.HTTP_200_OK)
 
 
-@api_view(['GET', 'POST'])
+@api_view(['GET', 'POST', 'DELETE'])
 def carrito_pedido(request):
     if request.method == 'GET':
         id_usuario = request.query_params.get('carrito')
@@ -204,3 +204,38 @@ def carrito_pedido(request):
                                            first_name=nombre, last_name=apellido)
 
         return JsonResponse({"status": "creado"}, status=status.HTTP_201_CREATED)
+    elif request.method == 'DELETE':
+        id_pedido = request.data.get('id_pedido')
+        if not id_pedido:
+            return JsonResponse({"error": "ID de usuario requerido"},
+                                status=status.HTTP_400_BAD_REQUEST)
+        try:
+            carrito = Carrito.objects.get(usuario=id_pedido)
+        except Carrito.DoesNotExist:
+            return JsonResponse({"error": "Carrito no encontrado"}, status=status.HTTP_404_NOT_FOUND)
+        try:
+            pedido = Pedido.objects.get(carrito=carrito)
+        except Pedido.DoesNotExist:
+            return JsonResponse({"error": "Pedido not found"}, status=status.HTTP_404_NOT_FOUND)
+
+        # Create a PedidoHistorico instance with the same data as the Pedido instance
+        PedidoHistorico.objects.create(
+            usuario=pedido.carrito.usuario,
+            direccion=pedido.direccion,
+            region=pedido.region,
+            comuna=pedido.comuna,
+            descripcion=pedido.descripcion,
+            fecha=pedido.fecha,
+            metodo_pago=pedido.metodo_pago,
+            nombre_empresa=pedido.nombre_empresa,
+            rut_empresa=pedido.rut_empresa,
+            first_name=pedido.first_name,
+            last_name=pedido.last_name,
+            email=pedido.email,
+            phone_number=pedido.phone_number,
+        )
+
+        # Delete the Pedido instance
+        pedido.delete()
+
+        return JsonResponse({"message": "Pedido confirmed and deleted"}, status=status.HTTP_200_OK)
