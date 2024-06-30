@@ -24,7 +24,7 @@ SECRET_KEY = 'django-insecure-t^)r0=5w1ozaw*5yp0-)f!jh!-&y=50hvion*+@dkx7-cy-kej
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["remiradagarciabackend-production.up.railway.app"]
 
 # Application definition
 
