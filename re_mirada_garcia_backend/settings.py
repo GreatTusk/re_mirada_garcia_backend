@@ -24,7 +24,7 @@ SECRET_KEY = 'django-insecure-t^)r0=5w1ozaw*5yp0-)f!jh!-&y=50hvion*+@dkx7-cy-kej
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["remiradagarciabackend-production.up.railway.app"]
+ALLOWED_HOSTS = ["remiradagarciabackend-production.up.railway.app", "localhost"]
 
 # Application definition
 
@@ -123,6 +123,6 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:3000",
-    "https://remiradagarciabackend-production.up.railway.app"
-
+    "https://remiradagarciabackend-production.up.railway.app",
+    "https://re-mirada-garcia.vercel.app"
 ]
