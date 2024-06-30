@@ -1,0 +1,1 @@
+web: gunicorn re_mirada_garcia_backend.wsgi
