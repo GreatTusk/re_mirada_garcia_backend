@@ -5,9 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d83804fa-4c8d-465a-8197-2461a69458b0" name="Changes" comment="carrito de compras listo: agregar un &quot;ver pedido y estado de pedidos&quot; ya es opcional">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/re_mirada_garcia_backend/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/re_mirada_garcia_backend/settings.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/re_mirada_garcia_backend/wsgi.py" beforeDir="false" afterPath="$PROJECT_DIR$/re_mirada_garcia_backend/wsgi.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build_files.sh" beforeDir="false" afterPath="$PROJECT_DIR$/build_files.sh" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -135,7 +134,7 @@
       <workItem from="1719281227747" duration="684000" />
       <workItem from="1719528618795" duration="2984000" />
       <workItem from="1719624649297" duration="3973000" />
-      <workItem from="1719716254142" duration="754000" />
+      <workItem from="1719716254142" duration="1127000" />
     </task>
     <task id="LOCAL-00001" summary="transición del backend a django">
       <option name="closed" value="true" />
@@ -217,7 +216,15 @@
       <option name="project" value="LOCAL" />
       <updated>1719716513189</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="carrito de compras listo: agregar un &quot;ver pedido y estado de pedidos&quot; ya es opcional">
+      <option name="closed" value="true" />
+      <created>1719717030402</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1719717030402</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
