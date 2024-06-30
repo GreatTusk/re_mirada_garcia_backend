@@ -123,6 +123,6 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:3000",
-    "remiradagarciabackend-production.up.railway.app"
+    "https://remiradagarciabackend-production.up.railway.app"
 
 ]
