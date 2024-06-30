@@ -4,14 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d83804fa-4c8d-465a-8197-2461a69458b0" name="Changes" comment="creadas vistas para los datos del pedido">
+    <list default="true" id="d83804fa-4c8d-465a-8197-2461a69458b0" name="Changes" comment="carrito de compras listo: agregar un &quot;ver pedido y estado de pedidos&quot; ya es opcional">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/db.sqlite3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/re_mirada/api.py" beforeDir="false" afterPath="$PROJECT_DIR$/re_mirada/api.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/re_mirada/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/re_mirada/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/re_mirada/serializers.py" beforeDir="false" afterPath="$PROJECT_DIR$/re_mirada/serializers.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/re_mirada/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/re_mirada/urls.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/re_mirada/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/re_mirada/views.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -204,7 +198,15 @@
       <option name="project" value="LOCAL" />
       <updated>1719686432301</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="carrito de compras listo: agregar un &quot;ver pedido y estado de pedidos&quot; ya es opcional">
+      <option name="closed" value="true" />
+      <created>1719690271980</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1719690271980</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -226,6 +228,7 @@
     <MESSAGE value="vistas creadas" />
     <MESSAGE value="vistas creadas y terminadas" />
     <MESSAGE value="creadas vistas para los datos del pedido" />
-    <option name="LAST_COMMIT_MESSAGE" value="creadas vistas para los datos del pedido" />
+    <MESSAGE value="carrito de compras listo: agregar un &quot;ver pedido y estado de pedidos&quot; ya es opcional" />
+    <option name="LAST_COMMIT_MESSAGE" value="carrito de compras listo: agregar un &quot;ver pedido y estado de pedidos&quot; ya es opcional" />
   </component>
 </project>
