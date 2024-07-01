@@ -4,11 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d83804fa-4c8d-465a-8197-2461a69458b0" name="Changes" comment="transicion a postgress">
+    <list default="true" id="d83804fa-4c8d-465a-8197-2461a69458b0" name="Changes" comment="integracion de preoductos de pedido">
       <change afterPath="$PROJECT_DIR$/.env" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/api_bank_plugin_settings.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/api_detail_persistent.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/variable_collection_persistent.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/re_mirada/api.py" beforeDir="false" afterPath="$PROJECT_DIR$/re_mirada/api.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/re_mirada/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/re_mirada/models.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/re_mirada/serializers.py" beforeDir="false" afterPath="$PROJECT_DIR$/re_mirada/serializers.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/re_mirada/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/re_mirada/urls.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/re_mirada/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/re_mirada/views.py" afterDir="false" />
@@ -66,7 +67,7 @@
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
     &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
     &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;com.intellij.python.django.customization.DjangoModulesConfigurable&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
     &quot;ts.external.directory.path&quot;: &quot;C:\\Users\\F776\\AppData\\Local\\Programs\\PyCharm Professional\\plugins\\javascript-plugin\\jsLanguageServicesImpl\\external&quot;,
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
@@ -144,7 +145,8 @@
       <workItem from="1719624649297" duration="3973000" />
       <workItem from="1719716254142" duration="12740000" />
       <workItem from="1719781905564" duration="1519000" />
-      <workItem from="1719850773495" duration="945000" />
+      <workItem from="1719850773495" duration="4801000" />
+      <workItem from="1719856055906" duration="3251000" />
     </task>
     <task id="LOCAL-00001" summary="transición del backend a django">
       <option name="closed" value="true" />
@@ -322,7 +324,15 @@
       <option name="project" value="LOCAL" />
       <updated>1719727588735</updated>
     </task>
-    <option name="localTasksCounter" value="23" />
+    <task id="LOCAL-00023" summary="integracion de preoductos de pedido">
+      <option name="closed" value="true" />
+      <created>1719851974925</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1719851974925</updated>
+    </task>
+    <option name="localTasksCounter" value="24" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -347,6 +357,7 @@
     <MESSAGE value="carrito de compras listo: agregar un &quot;ver pedido y estado de pedidos&quot; ya es opcional" />
     <MESSAGE value="tratar de deploy" />
     <MESSAGE value="transicion a postgress" />
-    <option name="LAST_COMMIT_MESSAGE" value="transicion a postgress" />
+    <MESSAGE value="integracion de preoductos de pedido" />
+    <option name="LAST_COMMIT_MESSAGE" value="integracion de preoductos de pedido" />
   </component>
 </project>

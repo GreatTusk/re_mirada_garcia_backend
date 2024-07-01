@@ -5,7 +5,7 @@ from rest_framework import serializers
 from .models import (ImageConfigPortafolio, ItemPortafolio, Servicios, PlanFoto, Cliente,
                      ItemTestimonio, ContactoVenta, Producto, Usuario,
                      Carrito, ListaItem, BlogImagen, Seccion, Cartablog, ImageFolders, ProductoPCarrito, Pedido,
-                     PedidoHistorico)
+                     PedidoHistorico, ProductosPedido)
 
 
 class ImageFolderSerializer(serializers.ModelSerializer):
@@ -133,14 +133,20 @@ class PedidoSerializer(serializers.ModelSerializer):
 
 
 class PedidoHistoricoSerializer(serializers.ModelSerializer):
+    total = serializers.SerializerMethodField()
+
     class Meta:
         model = PedidoHistorico
-        fields = '__all__'
+        fields = ['id_pedido', 'usuario', 'direccion', 'region', 'comuna', 'descripcion', 'fecha', 'metodo_pago', 'nombre_empresa', 'rut_empresa', 'first_name', 'last_name', 'email', 'phone_number', 'fecha_creacion', 'total']
+
+    def get_total(self, obj):
+        productos_pedido = ProductosPedido.objects.filter(pedido=obj)
+        return sum([producto.precio_total for producto in productos_pedido])
 
 
 class ProductosPedidoSerializer(serializers.ModelSerializer):
     producto = ProductoSerializer()
 
     class Meta:
-        model = ProductoPCarrito
-        fields = '__all__'
+        model = ProductosPedido
+        fields = ['producto', 'cantidad', 'precio_total']

@@ -7,7 +7,8 @@ from rest_framework import status
 from rest_framework.response import Response
 
 from .models import Usuario, Carrito, ProductoPCarrito, Producto, Pedido, PedidoHistorico, ProductosPedido
-from .serializers import UsuarioSerializer, ProductoPCarritoSerializer, PedidoHistoricoSerializer
+from .serializers import UsuarioSerializer, ProductoPCarritoSerializer, PedidoHistoricoSerializer, \
+    ProductosPedidoSerializer
 
 
 @api_view(['POST', 'PUT'])
@@ -139,16 +140,16 @@ def carrito_productos(request):
 @api_view(['GET', 'POST', 'DELETE'])
 def carrito_pedido(request):
     if request.method == 'GET':
-        id_usuario = request.data.get('userId')
+        id_usuario = request.query_params.get('userId')
         if not id_usuario:
-            return JsonResponse({"error": "ID de usuario es requerido"}, status=status.HTTP_400_BAD_REQUEST)
-            # Filter PedidoHistorico objects by usuario
+            return Response({"error": "ID de usuario es requerido"}, status=status.HTTP_400_BAD_REQUEST)
+        # Filter PedidoHistorico objects by usuario
         pedidos_historicos = PedidoHistorico.objects.filter(usuario=id_usuario)
 
         # Serialize the QuerySet
         serializer = PedidoHistoricoSerializer(pedidos_historicos, many=True)
         # Return the serialized data
-        return JsonResponse(serializer.data, safe=False, status=status.HTTP_200_OK)
+        return Response(serializer.data, status=status.HTTP_200_OK)
     elif request.method == 'POST':
         user_id = request.data.get('user_id')
 
@@ -234,7 +235,6 @@ def carrito_pedido(request):
 
         # Delete the Pedido instance
         pedido.delete()
-        # ProductoPCarrito.objects.filter(carrito=carrito).delete()
         productos_pedido = ProductoPCarrito.objects.filter(carrito=carrito)
 
         for producto_pedido in productos_pedido:
@@ -248,3 +248,21 @@ def carrito_pedido(request):
         productos_pedido.delete()
 
         return JsonResponse({"id": id_pedido_historico}, status=status.HTTP_200_OK)
+
+
+@api_view(['POST'])
+def productos_pedido(request):
+    if request.method == 'POST':
+        id_pedido = request.data.get('pedidoId')
+        if not id_pedido:
+            return JsonResponse({"error": "ID de pedido es requerido"}, status=status.HTTP_400_BAD_REQUEST)
+        try:
+            pedido = PedidoHistorico.objects.get(id_pedido=id_pedido)
+            productos_en_pedido = ProductosPedido.objects.filter(pedido=pedido)
+        except (Pedido.DoesNotExist, ProductosPedido.DoesNotExist):
+            return JsonResponse({"error": "Pedido or ProductosPedido not found"}, status=status.HTTP_404_NOT_FOUND)
+
+        # Serialize the QuerySet and PedidoHistorico object
+        productos_pedido_serializer = ProductosPedidoSerializer(productos_en_pedido, many=True)
+
+        return Response(productos_pedido_serializer.data, status=status.HTTP_200_OK)
