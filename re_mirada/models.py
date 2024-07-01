@@ -149,3 +149,10 @@ class PedidoHistorico(models.Model):
     email = models.EmailField()
     phone_number = models.CharField(max_length=255)
     fecha_creacion = models.DateTimeField(auto_now_add=True)
+
+
+class ProductosPedido(models.Model):
+    pedido = models.ForeignKey(PedidoHistorico, on_delete=models.CASCADE)
+    producto = models.ForeignKey(Producto, on_delete=models.CASCADE)
+    cantidad = models.IntegerField()
+    precio_total = models.IntegerField()

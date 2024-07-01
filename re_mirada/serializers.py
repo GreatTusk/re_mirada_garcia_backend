@@ -136,3 +136,11 @@ class PedidoHistoricoSerializer(serializers.ModelSerializer):
     class Meta:
         model = PedidoHistorico
         fields = '__all__'
+
+
+class ProductosPedidoSerializer(serializers.ModelSerializer):
+    producto = ProductoSerializer()
+
+    class Meta:
+        model = ProductoPCarrito
+        fields = '__all__'
