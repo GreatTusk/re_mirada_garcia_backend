@@ -266,3 +266,48 @@ def productos_pedido(request):
         productos_pedido_serializer = ProductosPedidoSerializer(productos_en_pedido, many=True)
 
         return Response(productos_pedido_serializer.data, status=status.HTTP_200_OK)
+
+
+@api_view(['GET'])
+def get_total_recaudado(request):
+    if request.method == 'GET':
+        pedidos_historicos = PedidoHistorico.objects.all()
+        total = 0
+        for pedido in pedidos_historicos:
+            productos_pedido = ProductosPedido.objects.filter(pedido=pedido)
+            total += sum([producto.precio_total for producto in productos_pedido])
+
+        return Response(total, status=status.HTTP_200_OK)
+
+
+@api_view(['GET'])
+def get_total_pedidos(request):
+    if request.method == 'GET':
+        pedidos_historicos = PedidoHistorico.objects.all()
+        return Response(len(pedidos_historicos), status=status.HTTP_200_OK)
+
+
+@api_view(['GET'])
+def get_total_usuarios(request):
+    if request.method == 'GET':
+        usuarios = Usuario.objects.all()
+        return Response(len(usuarios), status=status.HTTP_200_OK)
+
+
+@api_view(['GET'])
+def get_recaudado_por_mes(request):
+    if request.method == 'GET':
+        # Initialize total_por_mes with all months set to 0
+        total_por_mes = {str(month).zfill(2): 0 for month in range(1, 13)}
+
+        pedidos_historicos = PedidoHistorico.objects.all()
+        for pedido in pedidos_historicos:
+            mes = str(pedido.fecha_creacion).split('-')[1]
+            productos_pedido = ProductosPedido.objects.filter(pedido=pedido)
+            total = sum([producto.precio_total for producto in productos_pedido]) / 1000
+            total_por_mes[mes] += total
+
+        # Convert total_por_mes to an array of dictionaries
+        total_por_mes_array = [{'month': month, 'total': total} for month, total in total_por_mes.items()]
+
+        return Response(total_por_mes_array, status=status.HTTP_200_OK)

@@ -6,11 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="d83804fa-4c8d-465a-8197-2461a69458b0" name="Changes" comment="integracion de preoductos de pedido">
       <change afterPath="$PROJECT_DIR$/.env" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/api_bank_plugin_settings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/api_detail_persistent.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/variable_collection_persistent.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/re_mirada/serializers.py" beforeDir="false" afterPath="$PROJECT_DIR$/re_mirada/serializers.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/re_mirada/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/re_mirada/urls.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/re_mirada/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/re_mirada/views.py" afterDir="false" />
     </list>
@@ -146,7 +142,7 @@
       <workItem from="1719716254142" duration="12740000" />
       <workItem from="1719781905564" duration="1519000" />
       <workItem from="1719850773495" duration="4801000" />
-      <workItem from="1719856055906" duration="3251000" />
+      <workItem from="1719856055906" duration="9660000" />
     </task>
     <task id="LOCAL-00001" summary="transición del backend a django">
       <option name="closed" value="true" />
@@ -332,7 +328,15 @@
       <option name="project" value="LOCAL" />
       <updated>1719851974925</updated>
     </task>
-    <option name="localTasksCounter" value="24" />
+    <task id="LOCAL-00024" summary="integracion de preoductos de pedido">
+      <option name="closed" value="true" />
+      <created>1719865880198</created>
+      <option name="number" value="00024" />
+      <option name="presentableId" value="LOCAL-00024" />
+      <option name="project" value="LOCAL" />
+      <updated>1719865880198</updated>
+    </task>
+    <option name="localTasksCounter" value="25" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
