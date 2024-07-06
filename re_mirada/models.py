@@ -29,14 +29,6 @@ class Servicios(models.Model):
         return json.loads(self.servicios)
 
 
-class PlanFoto(models.Model):
-    id = models.CharField(max_length=255, primary_key=True)
-    titulo = models.CharField(max_length=255)
-    precio = models.IntegerField()
-    incluye = models.ForeignKey(Servicios, related_name='incluye', on_delete=models.CASCADE)
-    no_incluye = models.ForeignKey(Servicios, related_name='no_incluye', on_delete=models.CASCADE)
-
-
 class Cliente(models.Model):
     nombre = models.CharField(max_length=255)
     image_url = models.URLField()
@@ -63,6 +55,12 @@ class Producto(models.Model):
     precio = models.IntegerField()
     imagen_url = models.CharField(max_length=255)
     precio_oferta = models.IntegerField(null=True, blank=True)
+
+
+class PlanFoto(models.Model):
+    id_producto = models.ForeignKey(Producto, on_delete=models.CASCADE)
+    incluye = models.ForeignKey(Servicios, related_name='incluye', on_delete=models.CASCADE)
+    no_incluye = models.ForeignKey(Servicios, related_name='no_incluye', on_delete=models.CASCADE)
 
 
 class Usuario(models.Model):

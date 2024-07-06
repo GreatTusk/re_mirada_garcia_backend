@@ -1,14 +1,16 @@
+import json
 import uuid
 
 from django.core.exceptions import ValidationError
 from django.http import JsonResponse
-from rest_framework.decorators import api_view
 from rest_framework import status
+from rest_framework.decorators import api_view
 from rest_framework.response import Response
 
-from .models import Usuario, Carrito, ProductoPCarrito, Producto, Pedido, PedidoHistorico, ProductosPedido
+from .models import Usuario, Carrito, ProductoPCarrito, Producto, Pedido, PedidoHistorico, ProductosPedido, PlanFoto, \
+    Servicios
 from .serializers import UsuarioSerializer, ProductoPCarritoSerializer, PedidoHistoricoSerializer, \
-    ProductosPedidoSerializer
+    ProductosPedidoSerializer, ProductoSerializer
 
 
 @api_view(['POST', 'PUT'])
@@ -137,12 +139,43 @@ def carrito_productos(request):
         return JsonResponse({"message": "Producto eliminado del carrito"}, status=status.HTTP_200_OK)
 
 
+@api_view(['GET'])
+def get_pedido_detalle(request):
+    pedido_id = request.query_params.get('id_pedido')
+    if not pedido_id:
+        return Response({"error": "pedido_id query parameter is required"}, status=status.HTTP_400_BAD_REQUEST)
+
+    try:
+        pedido = PedidoHistorico.objects.get(id_pedido=pedido_id)
+    except PedidoHistorico.DoesNotExist:
+        return Response({"error": "Pedido not found"}, status=status.HTTP_404_NOT_FOUND)
+
+    productopedido = ProductosPedido.objects.filter(pedido=pedido)
+    productos_pedido_serializer = ProductosPedidoSerializer(productopedido, many=True)
+    pedidos_object = {
+        'pedido': PedidoHistoricoSerializer(pedido).data,
+        'productos_pedido': productos_pedido_serializer.data
+    }
+
+    return Response(pedidos_object, status=status.HTTP_200_OK)
+
+
 @api_view(['GET', 'POST', 'DELETE'])
 def carrito_pedido(request):
     if request.method == 'GET':
         id_usuario = request.query_params.get('userId')
         if not id_usuario:
-            return Response({"error": "ID de usuario es requerido"}, status=status.HTTP_400_BAD_REQUEST)
+            # Return all PedidoHistorico objects
+            pedidos_object = []
+            all_pedidos = PedidoHistorico.objects.all()
+            for pedido in all_pedidos:
+                productopedido = ProductosPedido.objects.filter(pedido=pedido)
+                productos_pedido_serializer = ProductosPedidoSerializer(productopedido, many=True)
+                pedidos_object.append({
+                    'pedido': PedidoHistoricoSerializer(pedido).data,
+                    'productos_pedido': productos_pedido_serializer.data
+                })
+            return Response(pedidos_object, status=status.HTTP_200_OK)
         # Filter PedidoHistorico objects by usuario
         pedidos_historicos = PedidoHistorico.objects.filter(usuario=id_usuario)
 
@@ -311,3 +344,114 @@ def get_recaudado_por_mes(request):
         total_por_mes_array = [{'month': month, 'total': total} for month, total in total_por_mes.items()]
 
         return Response(total_por_mes_array, status=status.HTTP_200_OK)
+
+
+# @api_view(['GET'])
+# def get_info_productos(request):
+#     if request.method == 'GET':
+#         productos = Producto.objects.all()
+#         producto_info = []
+#         for producto in productos:
+#             plan_fotos = PlanFoto.objects.filter(id_producto=producto)
+#             plan_fotos_list = list(plan_fotos.values('incluye', 'no_incluye'))  # Assuming PlanFoto has these fields
+#             producto_info.append({
+#                 'id': producto.id,
+#                 'nombre': producto.nombre,
+#                 'plan_fotos': plan_fotos_list
+#             })
+#         return Response(producto_info, status=status.HTTP_200_OK)
+DEFAULT_NO_INCLUYE_ID = 6
+
+
+@api_view(['GET', 'POST'])
+def get_info_productos(request):
+    if request.method == 'GET':
+        # Retrieve all Producto instances and their related Servicios
+        producto_id = request.query_params.get('id')
+        if not producto_id:
+            productos = Producto.objects.all()
+            producto_info = []
+            for producto in productos:
+                plan_foto = PlanFoto.objects.filter(id_producto=producto).first()
+                if plan_foto:
+                    incluye_servicios = plan_foto.incluye.get_servicios()
+                    no_incluye_servicios = plan_foto.no_incluye.get_servicios()
+                    producto_dict = {
+                        'producto': ProductoSerializer(producto).data,
+                        'incluye': incluye_servicios,
+                    }
+                    # Only add 'no_incluye' key if no_incluye_servicios is not empty
+                    if no_incluye_servicios:
+                        producto_dict['no_incluye'] = no_incluye_servicios
+                    producto_info.append(producto_dict)
+            return Response(producto_info, status=status.HTTP_200_OK)
+
+        producto = Producto.objects.get(id=producto_id)
+        plan_foto = PlanFoto.objects.filter(id_producto=producto).first()
+        if plan_foto:
+            incluye_servicios = plan_foto.incluye.get_servicios()
+            no_incluye_servicios = plan_foto.no_incluye.get_servicios()
+            producto_dict = {
+                'producto': ProductoSerializer(producto).data,
+                'incluye': incluye_servicios,
+            }
+            # Only add 'no_incluye' key if no_incluye_servicios is not empty
+            if no_incluye_servicios:
+                producto_dict['no_incluye'] = no_incluye_servicios
+
+            return Response(producto_dict, status=status.HTTP_200_OK)
+
+    elif request.method == 'POST':
+        nombre = request.data.get('nombre')
+        precio = request.data.get('precio')
+        precio_oferta = request.data.get('precio_oferta')
+        imagen_url = request.data.get('imagen_url')
+        incluye_data = request.data.get('incluye', [])
+        no_incluye_data = request.data.get('no_incluye', [])
+
+        producto, created = Producto.objects.update_or_create(
+            nombre=nombre,
+            defaults={
+                'precio': precio,
+                'imagen_url': imagen_url,
+                'precio_oferta': precio_oferta
+            }
+        )
+
+        # Create or update Servicios instance for incluye
+        incluye_servicios_json = json.dumps(incluye_data, sort_keys=True) if incluye_data else None
+        if incluye_servicios_json:
+            incluye_servicio, created = Servicios.objects.get_or_create(servicios=incluye_servicios_json)
+            if not created:
+                incluye_servicio.set_servicios(incluye_data)
+                incluye_servicio.save()
+        else:
+            incluye_servicio = None
+
+        # Create or update Servicios instance for no_incluye
+        no_incluye_servicios_json = json.dumps(no_incluye_data, sort_keys=True) if no_incluye_data else None
+        if no_incluye_servicios_json:
+            no_incluye_servicio, created = Servicios.objects.get_or_create(servicios=no_incluye_servicios_json)
+            if not created:
+                no_incluye_servicio.set_servicios(no_incluye_data)
+                no_incluye_servicio.save()
+        else:
+            no_incluye_servicio = Servicios.objects.get(pk=DEFAULT_NO_INCLUYE_ID)
+
+        # Link Servicios to Producto through PlanFoto
+        plan_foto, _ = PlanFoto.objects.update_or_create(
+            id_producto=producto,
+            defaults={'incluye': incluye_servicio, 'no_incluye': no_incluye_servicio}
+        )
+
+        producto_serialized = ProductoSerializer(producto).data
+        return JsonResponse({'message': 'Producto and Servicios updated successfully', 'producto': producto_serialized},
+                            status=status.HTTP_200_OK)
+
+
+@api_view(['GET'])
+def get_user_ids(request):
+    if request.method == 'GET':
+        usuarios = Usuario.objects.all()
+        user_ids = [usuario.id for usuario in usuarios]
+        return Response(user_ids, status=status.HTTP_200_OK)

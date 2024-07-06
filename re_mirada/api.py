@@ -1,7 +1,4 @@
-from rest_framework import viewsets, permissions, status
-from rest_framework.decorators import action
-from rest_framework.exceptions import ValidationError
-from rest_framework.response import Response
+from rest_framework import viewsets, permissions
 
 from .models import (ItemPortafolio, Servicios, PlanFoto, Cliente,
                      ItemTestimonio, ContactoVenta, Producto, Usuario,
@@ -74,33 +71,6 @@ class UsuarioViewSet(viewsets.ModelViewSet):
     queryset = Usuario.objects.all()
     serializer_class = UsuarioSerializer
     permission_classes = [permissions.AllowAny]
-
-    # @action(detail=False, methods=['post'])
-    # def register_usuario(self, request):
-    #     print("register_usuario called")
-    #     id_usu = request.data.get('id')
-    #     nombre = request.data.get('nombre')
-    #     email = request.data.get('email')
-    #
-    #     if not id_usu or not nombre or not email:
-    #         return Response({"error": "ID, nombre, and email are required"}, status=status.HTTP_400_BAD_REQUEST)
-    #
-    #     if Usuario.objects.filter(id=id_usu).exists():
-    #         return Response({"error": "Usuario already exists"}, status=status.HTTP_409_CONFLICT)
-    #
-    #     # Create Usuario instance
-    #     usuario = Usuario.objects.create(id=id_usu, nombre=nombre, email=email)
-    #
-    #     # Create Carrito instance associated with the Usuario instance
-    #     try:
-    #         carrito = Carrito.objects.create(usuario=usuario, precio_total=0, ahorros=0)
-    #         print(carrito)
-    #     except ValidationError as e:
-    #         print(e)
-    #
-    #     # Serialize and return Usuario instance
-    #     serializer = UsuarioSerializer(usuario)
-    #     return Response(serializer.data, status=status.HTTP_201_CREATED)
 
 
 class CarritoViewSet(viewsets.ModelViewSet):

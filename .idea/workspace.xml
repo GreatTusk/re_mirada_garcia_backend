@@ -4,11 +4,17 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d83804fa-4c8d-465a-8197-2461a69458b0" name="Changes" comment="integracion de preoductos de pedido">
+    <list default="true" id="d83804fa-4c8d-465a-8197-2461a69458b0" name="Changes" comment="nuevas vistas y rutas para el dashboard">
       <change afterPath="$PROJECT_DIR$/.env" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/restore.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/re_mirada/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/re_mirada/admin.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/re_mirada/api.py" beforeDir="false" afterPath="$PROJECT_DIR$/re_mirada/api.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/re_mirada/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/re_mirada/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/re_mirada/serializers.py" beforeDir="false" afterPath="$PROJECT_DIR$/re_mirada/serializers.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/re_mirada/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/re_mirada/urls.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/re_mirada/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/re_mirada/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/re_mirada_garcia_backend/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/re_mirada_garcia_backend/settings.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -66,6 +72,11 @@
     &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
     &quot;ts.external.directory.path&quot;: &quot;C:\\Users\\F776\\AppData\\Local\\Programs\\PyCharm Professional\\plugins\\javascript-plugin\\jsLanguageServicesImpl\\external&quot;,
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  },
+  &quot;keyToStringList&quot;: {
+    &quot;DatabaseDriversLRU&quot;: [
+      &quot;postgresql&quot;
+    ]
   }
 }</component>
   <component name="RecentsManager">
@@ -142,7 +153,9 @@
       <workItem from="1719716254142" duration="12740000" />
       <workItem from="1719781905564" duration="1519000" />
       <workItem from="1719850773495" duration="4801000" />
-      <workItem from="1719856055906" duration="9660000" />
+      <workItem from="1719856055906" duration="10523000" />
+      <workItem from="1720139645520" duration="9953000" />
+      <workItem from="1720205108823" duration="13389000" />
     </task>
     <task id="LOCAL-00001" summary="transición del backend a django">
       <option name="closed" value="true" />
@@ -336,7 +349,15 @@
       <option name="project" value="LOCAL" />
       <updated>1719865880198</updated>
     </task>
-    <option name="localTasksCounter" value="25" />
+    <task id="LOCAL-00025" summary="nuevas vistas y rutas para el dashboard">
+      <option name="closed" value="true" />
+      <created>1719876335328</created>
+      <option name="number" value="00025" />
+      <option name="presentableId" value="LOCAL-00025" />
+      <option name="project" value="LOCAL" />
+      <updated>1719876335328</updated>
+    </task>
+    <option name="localTasksCounter" value="26" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -362,6 +383,7 @@
     <MESSAGE value="tratar de deploy" />
     <MESSAGE value="transicion a postgress" />
     <MESSAGE value="integracion de preoductos de pedido" />
-    <option name="LAST_COMMIT_MESSAGE" value="integracion de preoductos de pedido" />
+    <MESSAGE value="nuevas vistas y rutas para el dashboard" />
+    <option name="LAST_COMMIT_MESSAGE" value="nuevas vistas y rutas para el dashboard" />
   </component>
 </project>

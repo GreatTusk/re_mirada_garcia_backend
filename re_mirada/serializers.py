@@ -47,15 +47,6 @@ class ServiciosSerializer(serializers.ModelSerializer):
         return representation
 
 
-class PlanFotoSerializer(serializers.ModelSerializer):
-    incluye = ServiciosSerializer()
-    no_incluye = ServiciosSerializer()
-
-    class Meta:
-        model = PlanFoto
-        fields = ['id', 'titulo', 'precio', 'incluye', 'no_incluye']
-
-
 class ClienteSerializer(serializers.ModelSerializer):
     class Meta:
         model = Cliente
@@ -80,6 +71,16 @@ class ProductoSerializer(serializers.ModelSerializer):
     class Meta:
         model = Producto
         fields = ['id', 'nombre', 'precio', 'precio_oferta', 'imagen_url']
+
+
+class PlanFotoSerializer(serializers.ModelSerializer):
+    incluye = ServiciosSerializer()
+    no_incluye = ServiciosSerializer()
+    id_producto = ProductoSerializer()
+
+    class Meta:
+        model = PlanFoto
+        fields = ['id_producto', 'incluye', 'no_incluye']
 
 
 class UsuarioSerializer(serializers.ModelSerializer):
@@ -137,7 +138,9 @@ class PedidoHistoricoSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = PedidoHistorico
-        fields = ['id_pedido', 'usuario', 'direccion', 'region', 'comuna', 'descripcion', 'fecha', 'metodo_pago', 'nombre_empresa', 'rut_empresa', 'first_name', 'last_name', 'email', 'phone_number', 'fecha_creacion', 'total']
+        fields = ['id_pedido', 'usuario', 'direccion', 'region', 'comuna', 'descripcion', 'fecha', 'metodo_pago',
+                  'nombre_empresa', 'rut_empresa', 'first_name', 'last_name', 'email', 'phone_number', 'fecha_creacion',
+                  'total']
 
     def get_total(self, obj):
         productos_pedido = ProductosPedido.objects.filter(pedido=obj)

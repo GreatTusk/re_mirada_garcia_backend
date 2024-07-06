@@ -1,12 +1,13 @@
+from django.urls import path
 from rest_framework import routers
-from django.urls import path, include
+
 from .api import (ItemPortafolioViewSet, ServiciosViewSet, PlanFotoViewSet, ClienteViewSet,
                   ItemTestimonioViewSet, ContactoVentaViewSet, ProductoViewSet,
                   UsuarioViewSet, CarritoViewSet, ListaItemViewSet, BlogImagenViewSet, SeccionViewSet,
                   CartablogViewSet, ImageFolderViewset, ImageConfigPortafolioViewSet, ProductoPCarritoViewSet,
                   PedidoViewSet, PedidoHistoricoViewset, ProductosPedidoViewSet)
 from .views import register_usuario, carrito_productos, carrito_pedido, productos_pedido, get_total_recaudado, \
-    get_total_pedidos, get_total_usuarios, get_recaudado_por_mes
+    get_total_pedidos, get_total_usuarios, get_recaudado_por_mes, get_info_productos, get_pedido_detalle, get_user_ids
 
 router = routers.DefaultRouter()
 router.register('itemportafolio', ItemPortafolioViewSet)
@@ -39,4 +40,7 @@ urlpatterns += [
     path('get_total_pedidos/', get_total_pedidos),
     path('get_total_usuarios/', get_total_usuarios),
     path('get_recaudado_por_mes/', get_recaudado_por_mes),
+    path('get_info_productos/', get_info_productos),
+    path('get_pedido_detalle/', get_pedido_detalle),
+    path('get_user_ids/', get_user_ids)
 ]
