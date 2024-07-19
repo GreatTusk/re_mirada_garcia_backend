@@ -9,9 +9,13 @@ https://docs.djangoproject.com/en/5.0/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.0/ref/settings/
 """
-
+import os
 from pathlib import Path
 
+import dj_database_url
+from dotenv import load_dotenv
+
+load_dotenv()
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -24,7 +28,7 @@ SECRET_KEY = 'django-insecure-t^)r0=5w1ozaw*5yp0-)f!jh!-&y=50hvion*+@dkx7-cy-kej
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["remiradagarciabackend-production.up.railway.app", "localhost"]
 
 # Application definition
 
@@ -38,6 +42,7 @@ INSTALLED_APPS = [
     're_mirada.apps.ReMiradaConfig',
     "corsheaders",
     'rest_framework',
+    'django_dump_load_utf8',
 ]
 
 MIDDLEWARE = [
@@ -75,13 +80,17 @@ WSGI_APPLICATION = 're_mirada_garcia_backend.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
-}
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': BASE_DIR / 'db.sqlite3',
+#     }
+# }
+
+DATABASES = {
+    'default': dj_database_url.config(default=os.getenv("DATABASE_URL"))
+}
 # Password validation
 # https://docs.djangoproject.com/en/5.0/ref/settings/#auth-password-validators
 
@@ -120,3 +129,9 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:3000",
+    "https://remiradagarciabackend-production.up.railway.app",
+    "https://re-mirada-garcia.vercel.app"
+]

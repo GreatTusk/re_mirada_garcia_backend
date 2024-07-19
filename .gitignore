@@ -1,0 +1,4 @@
+/myvenv
+.vercel
+.env
+db.sqlite3

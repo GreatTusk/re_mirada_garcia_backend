@@ -3,8 +3,9 @@ import json
 from rest_framework import serializers
 
 from .models import (ImageConfigPortafolio, ItemPortafolio, Servicios, PlanFoto, Cliente,
-                     ItemTestimonio, ContactoVenta, Producto, ProductoCarrito, Usuario,
-                     Carrito, ListaItem, BlogImagen, Seccion, Cartablog, ImageFolders)
+                     ItemTestimonio, ContactoVenta, Producto, Usuario,
+                     Carrito, ListaItem, BlogImagen, Seccion, Cartablog, ImageFolders, ProductoPCarrito, Pedido,
+                     PedidoHistorico, ProductosPedido)
 
 
 class ImageFolderSerializer(serializers.ModelSerializer):
@@ -46,17 +47,7 @@ class ServiciosSerializer(serializers.ModelSerializer):
         return representation
 
 
-class PlanFotoSerializer(serializers.ModelSerializer):
-    incluye = ServiciosSerializer()
-    no_incluye = ServiciosSerializer()
-
-    class Meta:
-        model = PlanFoto
-        fields = ['id', 'titulo', 'precio', 'incluye', 'no_incluye']
-
-
 class ClienteSerializer(serializers.ModelSerializer):
-
     class Meta:
         model = Cliente
         fields = '__all__'
@@ -64,6 +55,7 @@ class ClienteSerializer(serializers.ModelSerializer):
 
 class ItemTestimonioSerializer(serializers.ModelSerializer):
     cliente = ClienteSerializer()
+
     class Meta:
         model = ItemTestimonio
         fields = '__all__'
@@ -78,13 +70,17 @@ class ContactoVentaSerializer(serializers.ModelSerializer):
 class ProductoSerializer(serializers.ModelSerializer):
     class Meta:
         model = Producto
-        fields = '__all__'
+        fields = ['id', 'nombre', 'precio', 'precio_oferta', 'imagen_url']
 
 
-class ProductoCarritoSerializer(serializers.ModelSerializer):
+class PlanFotoSerializer(serializers.ModelSerializer):
+    incluye = ServiciosSerializer()
+    no_incluye = ServiciosSerializer()
+    id_producto = ProductoSerializer()
+
     class Meta:
-        model = ProductoCarrito
-        fields = '__all__'
+        model = PlanFoto
+        fields = ['id_producto', 'incluye', 'no_incluye']
 
 
 class UsuarioSerializer(serializers.ModelSerializer):
@@ -121,3 +117,39 @@ class CartablogSerializer(serializers.ModelSerializer):
     class Meta:
         model = Cartablog
         fields = '__all__'
+
+
+class ProductoPCarritoSerializer(serializers.ModelSerializer):
+    producto_carrito = ProductoSerializer()
+
+    class Meta:
+        model = ProductoPCarrito
+        fields = ['id', 'producto_carrito', 'cantidad', 'carrito']
+
+
+class PedidoSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Pedido
+        fields = '__all__'
+
+
+class PedidoHistoricoSerializer(serializers.ModelSerializer):
+    total = serializers.SerializerMethodField()
+
+    class Meta:
+        model = PedidoHistorico
+        fields = ['id_pedido', 'usuario', 'direccion', 'region', 'comuna', 'descripcion', 'fecha', 'metodo_pago',
+                  'nombre_empresa', 'rut_empresa', 'first_name', 'last_name', 'email', 'phone_number', 'fecha_creacion',
+                  'total']
+
+    def get_total(self, obj):
+        productos_pedido = ProductosPedido.objects.filter(pedido=obj)
+        return sum([producto.precio_total for producto in productos_pedido])
+
+
+class ProductosPedidoSerializer(serializers.ModelSerializer):
+    producto = ProductoSerializer()
+
+    class Meta:
+        model = ProductosPedido
+        fields = ['producto', 'cantidad', 'precio_total']

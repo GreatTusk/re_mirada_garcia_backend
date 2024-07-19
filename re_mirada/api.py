@@ -1,14 +1,16 @@
 from rest_framework import viewsets, permissions
 
 from .models import (ItemPortafolio, Servicios, PlanFoto, Cliente,
-                     ItemTestimonio, ContactoVenta, Producto, ProductoCarrito, Usuario,
-                     Carrito, ListaItem, BlogImagen, Seccion, Cartablog, ImageFolders, ImageConfigPortafolio)
+                     ItemTestimonio, ContactoVenta, Producto, Usuario,
+                     Carrito, ListaItem, BlogImagen, Seccion, Cartablog, ImageFolders, ImageConfigPortafolio,
+                     ProductoPCarrito, Pedido, PedidoHistorico, ProductosPedido)
 from .serializers import (ItemPortafolioSerializer, ServiciosSerializer,
                           PlanFotoSerializer, ClienteSerializer, ItemTestimonioSerializer,
-                          ContactoVentaSerializer, ProductoSerializer, ProductoCarritoSerializer,
+                          ContactoVentaSerializer, ProductoSerializer,
                           UsuarioSerializer, CarritoSerializer, ListaItemSerializer,
                           BlogImagenSerializer, SeccionSerializer, CartablogSerializer, ImageFolderSerializer,
-                          ImageConfigPortafolioSerializer)
+                          ImageConfigPortafolioSerializer, ProductoPCarritoSerializer, PedidoSerializer,
+                          PedidoHistoricoSerializer, ProductosPedidoSerializer)
 
 
 class ImageFolderViewset(viewsets.ModelViewSet):
@@ -65,12 +67,6 @@ class ProductoViewSet(viewsets.ModelViewSet):
     permission_classes = [permissions.AllowAny]
 
 
-class ProductoCarritoViewSet(viewsets.ModelViewSet):
-    queryset = ProductoCarrito.objects.all()
-    serializer_class = ProductoCarritoSerializer
-    permission_classes = [permissions.AllowAny]
-
-
 class UsuarioViewSet(viewsets.ModelViewSet):
     queryset = Usuario.objects.all()
     serializer_class = UsuarioSerializer
@@ -104,4 +100,28 @@ class SeccionViewSet(viewsets.ModelViewSet):
 class CartablogViewSet(viewsets.ModelViewSet):
     queryset = Cartablog.objects.all()
     serializer_class = CartablogSerializer
+    permission_classes = [permissions.AllowAny]
+
+
+class ProductoPCarritoViewSet(viewsets.ModelViewSet):
+    queryset = ProductoPCarrito.objects.all()
+    serializer_class = ProductoPCarritoSerializer
+    permission_classes = [permissions.AllowAny]
+
+
+class PedidoViewSet(viewsets.ModelViewSet):
+    queryset = Pedido.objects.all()
+    serializer_class = PedidoSerializer
+    permission_classes = [permissions.AllowAny]
+
+
+class PedidoHistoricoViewset(viewsets.ModelViewSet):
+    queryset = PedidoHistorico.objects.all()
+    serializer_class = PedidoHistoricoSerializer
+    permission_classes = [permissions.AllowAny]
+
+
+class ProductosPedidoViewSet(viewsets.ModelViewSet):
+    queryset = ProductosPedido.objects.all()
+    serializer_class = ProductosPedidoSerializer
     permission_classes = [permissions.AllowAny]

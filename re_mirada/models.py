@@ -29,14 +29,6 @@ class Servicios(models.Model):
         return json.loads(self.servicios)
 
 
-class PlanFoto(models.Model):
-    id = models.CharField(max_length=255, primary_key=True)
-    titulo = models.CharField(max_length=255)
-    precio = models.IntegerField()
-    incluye = models.ForeignKey(Servicios, related_name='incluye', on_delete=models.CASCADE)
-    no_incluye = models.ForeignKey(Servicios, related_name='no_incluye', on_delete=models.CASCADE)
-
-
 class Cliente(models.Model):
     nombre = models.CharField(max_length=255)
     image_url = models.URLField()
@@ -58,30 +50,37 @@ class ContactoVenta(models.Model):
 
 
 class Producto(models.Model):
-    id = models.CharField(max_length=255, primary_key=True)
+    id = models.AutoField(primary_key=True)
     nombre = models.CharField(max_length=255)
-    precio = models.DecimalField(max_digits=10, decimal_places=2)
-    imagen_url = models.URLField()
-    precio_oferta = models.DecimalField(max_digits=10, decimal_places=2, null=True, blank=True)
+    precio = models.IntegerField()
+    imagen_url = models.CharField(max_length=255)
+    precio_oferta = models.IntegerField(null=True, blank=True)
 
 
-class ProductoCarrito(models.Model):
-    producto = models.ForeignKey(Producto, on_delete=models.CASCADE)
-    cantidad = models.IntegerField()
+class PlanFoto(models.Model):
+    id_producto = models.ForeignKey(Producto, on_delete=models.CASCADE)
+    incluye = models.ForeignKey(Servicios, related_name='incluye', on_delete=models.CASCADE)
+    no_incluye = models.ForeignKey(Servicios, related_name='no_incluye', on_delete=models.CASCADE)
 
 
 class Usuario(models.Model):
     id = models.CharField(max_length=255, primary_key=True)
-    nombre = models.CharField(max_length=255)
+    first_name = models.CharField(max_length=255)
+    last_name = models.CharField(max_length=255, null=True)
     email = models.EmailField()
+    phone_number = models.CharField(max_length=255, null=True)
 
 
 class Carrito(models.Model):
-    id = models.CharField(max_length=255, primary_key=True)
-    usuario = models.ForeignKey(Usuario, on_delete=models.CASCADE)
-    productos = models.ManyToManyField(ProductoCarrito)
-    precio_total = models.DecimalField(max_digits=10, decimal_places=2)
-    ahorros = models.DecimalField(max_digits=10, decimal_places=2)
+    usuario = models.OneToOneField(Usuario, primary_key=True, on_delete=models.CASCADE)
+    precio_total = models.IntegerField()
+    ahorros = models.IntegerField()
+
+
+class ProductoPCarrito(models.Model):
+    carrito = models.ForeignKey(Carrito, default=None, on_delete=models.CASCADE)
+    producto_carrito = models.ForeignKey(Producto, on_delete=models.CASCADE)
+    cantidad = models.IntegerField()
 
 
 class ListaItem(models.Model):
@@ -114,3 +113,44 @@ class Cartablog(models.Model):
     fechapub = models.DateField()
     tag = models.CharField(max_length=255)
     cita = models.TextField(null=True, blank=True)
+
+
+class Pedido(models.Model):
+    carrito = models.OneToOneField(Carrito, on_delete=models.CASCADE, primary_key=True)
+    direccion = models.CharField(max_length=255)
+    region = models.CharField(max_length=255)
+    comuna = models.CharField(max_length=255)
+    descripcion = models.TextField()
+    fecha = models.CharField(max_length=255)
+    metodo_pago = models.CharField(max_length=255)
+    nombre_empresa = models.CharField(max_length=255, blank=True, null=True)
+    rut_empresa = models.CharField(max_length=255, blank=True, null=True)
+    first_name = models.CharField(max_length=255)
+    last_name = models.CharField(max_length=255)
+    email = models.EmailField()
+    phone_number = models.CharField(max_length=255)
+
+
+class PedidoHistorico(models.Model):
+    id_pedido = models.UUIDField(primary_key=True)
+    usuario = models.ForeignKey(Usuario, on_delete=models.CASCADE)
+    direccion = models.CharField(max_length=255)
+    region = models.CharField(max_length=255)
+    comuna = models.CharField(max_length=255)
+    descripcion = models.TextField()
+    fecha = models.CharField(max_length=255)
+    metodo_pago = models.CharField(max_length=255)
+    nombre_empresa = models.CharField(max_length=255, blank=True, null=True)
+    rut_empresa = models.CharField(max_length=255, blank=True, null=True)
+    first_name = models.CharField(max_length=255)
+    last_name = models.CharField(max_length=255)
+    email = models.EmailField()
+    phone_number = models.CharField(max_length=255)
+    fecha_creacion = models.DateTimeField(auto_now_add=True)
+
+
+class ProductosPedido(models.Model):
+    pedido = models.ForeignKey(PedidoHistorico, on_delete=models.CASCADE)
+    producto = models.ForeignKey(Producto, on_delete=models.CASCADE)
+    cantidad = models.IntegerField()
+    precio_total = models.IntegerField()
